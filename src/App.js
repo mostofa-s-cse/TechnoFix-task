@@ -111,7 +111,22 @@ const TableWithMenu = ({ columns, data }) => {
       <div className="container">
         <div className="card">
           <div className="title">
+            <div>
             <h2>Table</h2>
+            <div>
+                <label htmlFor="itemsPerPage">Items Per Page:</label>
+                <select
+                  id="itemsPerPage"
+                  value={itemsPerPage}
+                  onChange={handleItemsPerPageChange}
+                >
+                  <option value={2}>2</option>
+                  <option value={5}>5</option>
+                  <option value={10}>10</option>
+                  {/* Add more options if needed */}
+                </select>
+              </div>
+              </div>
             <div className="menu-toggle">
               <input type="checkbox" id="toggle" style={{ display: 'none' }} />
               <label htmlFor="toggle" className="button">
@@ -132,19 +147,7 @@ const TableWithMenu = ({ columns, data }) => {
                   </li>
                 ))}
               </ul>
-              <div>
-                <label htmlFor="itemsPerPage">Items Per Page:</label>
-                <select
-                  id="itemsPerPage"
-                  value={itemsPerPage}
-                  onChange={handleItemsPerPageChange}
-                >
-                  <option value={2}>2</option>
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
-                  {/* Add more options if needed */}
-                </select>
-              </div>
+              
             </div>
           </div>
           <CustomTable
