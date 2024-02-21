@@ -6,12 +6,10 @@
   margin-left: auto;
 }
 .card {
-  width: 100%;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
-  margin: 20px;
 }
 .title{
   display: flex;
@@ -30,6 +28,7 @@
 
 .table-header {
   font-weight: bold;
+  background-color: #cccccc21;
 }
 
 .table-cell {
@@ -99,6 +98,7 @@
   border-top: none;
   display: none;
   border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #toggle:checked+.button~.menu {
