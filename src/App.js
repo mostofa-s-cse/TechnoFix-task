@@ -19,11 +19,19 @@ const TableWithMenu = ({ columns }) => {
   const [itemsPerPage, setItemsPerPage] = useState(10); // Initial value
 
   const [data, setData] = useState([]); // Initialize data with an empty array
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
   useEffect(() => {
     fetch('https://dummyjson.com/users')
       .then(res => res.json())
-      .then(json => setData(json.users)) 
+      .then(json => {
+        setData(json.users);
+        setIsLoading(false); // Set loading state to false when data is fetched
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        setIsLoading(false); // Set loading state to false in case of an error
+      });
   }, []);
 
   const toggleColumnVisibility = (key) => {
@@ -82,11 +90,15 @@ const TableWithMenu = ({ columns }) => {
               </ul>
             </div>
           </div>
-          <CustomTable
-            columns={[...visibleColumns, { key: 'actions', label: 'Actions' }]}
-            data={data}
-            itemsPerPage={itemsPerPage}
-          />
+          {isLoading ? ( // Conditionally render loader if isLoading is true
+            <div className="loader">Loading...</div>
+          ) : (
+            <CustomTable
+              columns={[...visibleColumns, { key: 'actions', label: 'Actions' }]}
+              data={data}
+              itemsPerPage={itemsPerPage}
+            />
+          )}
         </div>
       </div>
     </>
