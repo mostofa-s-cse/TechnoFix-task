@@ -1,12 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
-
-const data = [
-  { id: 1, name: 'John', age: 25, city: 'New York' },
-  { id: 2, name: 'Alice', age: 30, city: 'Los Angeles' },
-  { id: 3, name: 'Bob', age: 28, city: 'Chicago' },
-  // Add more data items if needed
-];
 
 const handleEdit = (id) => {
   // Handle edit action
@@ -16,6 +9,88 @@ const handleEdit = (id) => {
 const handleDelete = (id) => {
   // Handle delete action
   console.log(`Deleting item with ID ${id}`);
+};
+
+const TableWithMenu = ({ columns }) => {
+  const [visibleColumns, setVisibleColumns] = useState(
+    columns.map((column) => ({ ...column, visible: true }))
+  );
+
+  const [itemsPerPage, setItemsPerPage] = useState(10); // Initial value
+
+  const [data, setData] = useState([]); // Initialize data with an empty array
+
+  useEffect(() => {
+    fetch('https://dummyjson.com/users')
+      .then(res => res.json())
+      .then(json => setData(json.users)) 
+  }, []);
+
+  const toggleColumnVisibility = (key) => {
+    setVisibleColumns((prevColumns) =>
+      prevColumns.map((column) =>
+        column.key === key ? { ...column, visible: !column.visible } : column
+      )
+    );
+  };
+
+  const handleItemsPerPageChange = (e) => {
+    setItemsPerPage(parseInt(e.target.value));
+  };
+
+  return (
+    <>
+      <div className="container">
+        <div className="card">
+          <div className="title">
+            <div>
+              <h2>Table</h2>
+              <div>
+                <label htmlFor="itemsPerPage">Items Per Page:</label>
+                <select
+                  id="itemsPerPage"
+                  value={itemsPerPage}
+                  onChange={handleItemsPerPageChange}
+                >
+                  <option value={10}>10</option>
+                  <option value={25}>25</option>
+                  <option value={50}>50</option>
+                  <option value={100}>100</option>
+                  {/* Add more options if needed */}
+                </select>
+              </div>
+            </div>
+            <div className="menu-toggle">
+              <input type="checkbox" id="toggle" style={{ display: 'none' }} />
+              <label htmlFor="toggle" className="button">
+                <span className="icon"></span>
+              </label>
+              <ul className="menu">
+                <p>Add or remove columns</p>
+                {visibleColumns.map((column) => (
+                  <li key={column.key}>
+                    <label>
+                      <input
+                        type="checkbox"
+                        checked={column.visible}
+                        onChange={() => toggleColumnVisibility(column.key)}
+                      />
+                      {column.label}
+                    </label>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <CustomTable
+            columns={[...visibleColumns, { key: 'actions', label: 'Actions' }]}
+            data={data}
+            itemsPerPage={itemsPerPage}
+          />
+        </div>
+      </div>
+    </>
+  );
 };
 
 const CustomTable = ({ columns, data, itemsPerPage }) => {
@@ -87,88 +162,15 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
   );
 };
 
-const TableWithMenu = ({ columns, data }) => {
-  const [visibleColumns, setVisibleColumns] = useState(
-    columns.map((column) => ({ ...column, visible: true }))
-  );
-
-  const [itemsPerPage, setItemsPerPage] = useState(2); // Initial value
-
-  const toggleColumnVisibility = (key) => {
-    setVisibleColumns((prevColumns) =>
-      prevColumns.map((column) =>
-        column.key === key ? { ...column, visible: !column.visible } : column
-      )
-    );
-  };
-
-  const handleItemsPerPageChange = (e) => {
-    setItemsPerPage(parseInt(e.target.value));
-  };
-
-  return (
-    <>
-      <div className="container">
-        <div className="card">
-          <div className="title">
-            <div>
-            <h2>Table</h2>
-            <div>
-                <label htmlFor="itemsPerPage">Items Per Page:</label>
-                <select
-                  id="itemsPerPage"
-                  value={itemsPerPage}
-                  onChange={handleItemsPerPageChange}
-                >
-                  <option value={2}>2</option>
-                  <option value={5}>5</option>
-                  <option value={10}>10</option>
-                  {/* Add more options if needed */}
-                </select>
-              </div>
-              </div>
-            <div className="menu-toggle">
-              <input type="checkbox" id="toggle" style={{ display: 'none' }} />
-              <label htmlFor="toggle" className="button">
-                <span className="icon"></span>
-              </label>
-              <ul className="menu">
-                <p>Add or remove columns</p>
-                {visibleColumns.map((column) => (
-                  <li key={column.key}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={column.visible}
-                        onChange={() => toggleColumnVisibility(column.key)}
-                      />
-                      {column.label}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-              
-            </div>
-          </div>
-          <CustomTable
-            columns={[...visibleColumns, { key: 'actions', label: 'Actions' }]}
-            data={data}
-            itemsPerPage={itemsPerPage}
-          />
-        </div>
-      </div>
-    </>
-  );
-};
-
 function App() {
   const columns = [
-    { key: 'name', label: 'Name' },
+    { key: 'firstName', label: 'First Name' },
+    { key: 'email', label: 'Email' },
     { key: 'age', label: 'Age' },
-    { key: 'city', label: 'City' },
+    { key: 'phone', label: 'Phone' },
     { key: 'action', label: 'Action' },
   ];
-  return <TableWithMenu columns={columns} data={data} />;
+  return <TableWithMenu columns={columns} />;
 }
 
 export default App;
