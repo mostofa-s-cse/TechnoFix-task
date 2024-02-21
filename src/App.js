@@ -47,12 +47,12 @@ const TableWithMenu = ({ columns, data }) => {
       <div className='title'>
         <h2>Table</h2>
          <div class="menu-toggle">
-  <input type="checkbox" id="toggle"/>
+  <input type="checkbox" id="toggle" style={{ display: 'none' }} />
   <label for="toggle" class="button">
     <span class="icon"></span>
   </label>
       <ul class="menu">
-        <ul>
+          <p>Add or remove colums</p>
           {visibleColumns.map(column => (
             <li key={column.key}>
               <label>
@@ -66,7 +66,6 @@ const TableWithMenu = ({ columns, data }) => {
             </li>
           ))}
         </ul>
-      </ul>
     </div>
           </div>
           <CustomTable columns={visibleColumns} data={data} />

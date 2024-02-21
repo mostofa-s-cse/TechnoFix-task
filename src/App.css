@@ -89,14 +89,16 @@
 .menu {
   position: absolute;
   top: 100%;
-  left: 0;
-  background-color: #f9f9f9;
+  left: -100px;
+  background-color: #fff;
   list-style-type: none;
-  padding: 0;
+  padding: 10px;
   margin: 0;
+  width: 170px;
   border: 1px solid #ccc;
   border-top: none;
   display: none;
+  border-radius: 5px;
 }
 
 #toggle:checked+.button~.menu {
@@ -105,6 +107,9 @@
 
 .menu li {
   padding: 10px;
+}
+.menu ul {
+  list-style: none;
 }
 
 .menu li a {
