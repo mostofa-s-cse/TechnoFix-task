@@ -72,6 +72,7 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
       ))}
       {/* Pagination controls */}
       <div className="pagination">
+        <span className="page-number">Page {currentPage} of {totalPages}</span>
         {Array.from({ length: totalPages }).map((_, index) => (
           <button
             key={index}
