@@ -47,26 +47,37 @@
   margin-right: 10px; 
   font-size: 16px; 
 }
+.table-container {
+  overflow: auto;
+}
 
 .table {
-  width: 100%;
-  overflow: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .table-row {
   display: flex;
-  border-bottom: 1px solid #ccc;
 }
+
+.table-cell {
+  flex: 1 1;
+  padding: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  word-wrap: break-word; /* Allow content to wrap within cells */
+  overflow: hidden; /* Hide overflowing content */
+}
+
+
+
+
 
 .table-header {
   font-weight: bold;
   background-color: #cccccc21;
 }
 
-.table-cell {
-  flex: 1;
-  padding: 8px;
-}
 
 .table-cell button {
   margin-right: 5px; 
@@ -190,4 +201,11 @@
 .menu li a {
   text-decoration: none;
   color: #333;
+}
+
+@media (max-width: 600px) {
+  .table-cell {
+    flex: none; /* Disable flex-grow and flex-shrink */
+    width: 100%; /* Set a fixed width for smaller devices */
+  }
 }

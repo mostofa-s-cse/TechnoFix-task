@@ -140,6 +140,7 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
 
   return (
     <>
+    <div className='table-container'>
     <div className="table">
       <div className="table-row table-header">
         {columns.map((column) => (
@@ -174,6 +175,8 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
       ))}
       
     </div>
+    </div>
+
     {/* Pagination controls */}
     <div className="pagination">
     <span className="page-number">Page {currentPage} of {totalPages}</span>
