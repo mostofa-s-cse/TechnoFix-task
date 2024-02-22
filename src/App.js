@@ -21,6 +21,7 @@ const TableWithMenu = ({ columns }) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
+  // Fatch Dummyjson
   useEffect(() => {
     fetch('https://dummyjson.com/users')
       .then(res => res.json())
@@ -151,14 +152,21 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
                 key={column.key}
                 style={{ display: column.visible ? 'block' : 'none' }}
               >
-                {column.key === 'action' ? (
-                  <>
-                    <button className='edit' onClick={() => handleEdit(row.id)}>Edit</button>
-                    <button className='delete' onClick={() => handleDelete(row.id)}>Delete</button>
-                  </>
-                ) : (
-                  row[column.key]
-                )}
+                {column.key === 'status' ? (
+              <div className="status-selector">
+                <select id="status">
+                  <option value="publish">Publish</option>
+                  <option value="draft">Draft</option>
+                </select>
+              </div>
+            ) : column.key === 'action' ? (
+              <>
+                <button className='edit' onClick={() => handleEdit(row.id)}>Edit</button>
+                <button className='delete' onClick={() => handleDelete(row.id)}>Delete</button>
+              </>
+            ) : (
+              row[column.key]
+            )}
               </div>
             ))}
           </div>
@@ -191,6 +199,7 @@ function App() {
     { key: 'email', label: 'Email' },
     { key: 'age', label: 'Age' },
     { key: 'phone', label: 'Phone' },
+    { key: 'status', label: 'Status' },
     { key: 'action', label: 'Action' },
   ];
   return <TableWithMenu columns={columns} />;
