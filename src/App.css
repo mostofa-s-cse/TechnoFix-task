@@ -10,12 +10,29 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   background-color: #fff;
+  margin-top: 30px;
 }
 .title{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
+.loader {
+  border: 4px solid #f3f3f3; 
+  border-top: 4px solid #3498db; 
+  border-radius: 50%; 
+  width: 30px; 
+  height: 30px; 
+  animation: spin 1s linear infinite; 
+  margin: 0 auto; 
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); } 
+  100% { transform: rotate(360deg); } 
+}
+
 
 #itemsPerPage {
   padding: 4px; 
@@ -31,10 +48,9 @@
   font-size: 16px; 
 }
 
-
 .table {
   width: 100%;
-  border-collapse: collapse;
+  overflow: auto;
 }
 
 .table-row {
@@ -62,6 +78,7 @@
 }
 .table-cell .edit {
   background-color: #007bff; 
+  margin-bottom: 4px;
 }
 
 .table-cell .delete {
@@ -76,21 +93,21 @@
 }
 
 .pagination button {
-  margin: 0 5px; /* Adjust margin as needed */
-  padding: 5px 10px; /* Adjust padding as needed */
-  background-color: #f0f0f0; /* Background color */
+  margin: 0 5px; 
+  padding: 5px 10px; 
+  background-color: #f0f0f0; 
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .pagination button.active {
-  background-color: #007bff; /* Active page button background color */
-  color: #fff; /* Active page button text color */
+  background-color: #007bff; 
+  color: #fff; 
 }
 
 .pagination button:disabled {
-  opacity: 0.6; /* Adjust opacity for disabled buttons */
+  opacity: 0.6; 
   cursor: not-allowed;
 }
 

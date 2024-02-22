@@ -91,7 +91,7 @@ const TableWithMenu = ({ columns }) => {
             </div>
           </div>
           {isLoading ? ( // Conditionally render loader if isLoading is true
-            <div className="loader">Loading...</div>
+            <div className="loader"></div>
           ) : (
             <CustomTable
               columns={[...visibleColumns, { key: 'actions', label: 'Actions' }]}
@@ -139,6 +139,7 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
   };
 
   return (
+    <>
     <div className="table">
       <div className="table-row table-header">
         {columns.map((column) => (
@@ -171,23 +172,25 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
           ))}
         </div>
       ))}
-      {/* Pagination controls */}
-      <div className="pagination">
-      <span className="page-number">Page {currentPage} of {totalPages}</span>
-        <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-        {Array.from({ length: totalPages }).map((_, index) => (
-            <button
-              key={index}
-              onClick={() => handlePageChange(index + 1)}
-              className={currentPage === index + 1 ? 'active' : ''}
-              disabled={currentPage === index + 1}
-            >
-              {index + 1}
-            </button>
-          ))}
-        <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
-      </div>
+      
     </div>
+    {/* Pagination controls */}
+    <div className="pagination">
+    <span className="page-number">Page {currentPage} of {totalPages}</span>
+      <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
+      {Array.from({ length: totalPages }).map((_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index + 1)}
+            className={currentPage === index + 1 ? 'active' : ''}
+            disabled={currentPage === index + 1}
+          >
+            {index + 1}
+          </button>
+        ))}
+      <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
+    </div>
+    </>
   );
 };
 
