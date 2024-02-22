@@ -1,10 +1,10 @@
+/* Global Styles */
 .container {
   width: 80%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
+  padding: 0 15px;
+  margin: 0 auto;
 }
+
 .card {
   padding: 20px;
   border-radius: 10px;
@@ -12,28 +12,76 @@
   background-color: #fff;
   margin-top: 30px;
 }
-.title{
+
+.title {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .loader {
-  border: 4px solid #f3f3f3; 
-  border-top: 4px solid #3498db; 
-  border-radius: 50%; 
-  width: 30px; 
-  height: 30px; 
-  animation: spin 1s linear infinite; 
-  margin: 0 auto; 
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); } 
-  100% { transform: rotate(360deg); } 
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
+/* Table Styles */
+.table-container {
+  overflow: auto;
+}
 
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-row {
+  display: flex;
+}
+
+.table-header {
+  font-weight: bold;
+  background-color: #cccccc21;
+}
+
+.table-cell {
+  flex: 1 1;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+/* Table Cell Buttons */
+.table-cell button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.table-cell .edit {
+  background-color: #007bff;
+  margin-bottom: 4px;
+}
+
+.table-cell .delete {
+  background-color: red;
+}
 #itemsPerPage {
   padding: 4px; 
   font-size: 16px; 
@@ -42,60 +90,11 @@
   margin-bottom: 10px; 
 }
 
-/* CSS for the label */
-.container label {
+.itemsPerPage-label {
   margin-right: 10px; 
   font-size: 16px; 
 }
-.table-container {
-  overflow: auto;
-}
-
-.table {
-  display: flex;
-  flex-direction: column;
-}
-
-.table-row {
-  display: flex;
-}
-
-.table-cell {
-  flex: 1 1;
-  padding: 5px;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-  word-wrap: break-word; /* Allow content to wrap within cells */
-  overflow: hidden; /* Hide overflowing content */
-}
-
-
-
-
-
-.table-header {
-  font-weight: bold;
-  background-color: #cccccc21;
-}
-
-
-.table-cell button {
-  margin-right: 5px; 
-  padding: 5px 10px; 
-  color: #fff; 
-  border: none;
-  border-radius: 3px;
-  cursor: pointer;
-}
-.table-cell .edit {
-  background-color: #007bff; 
-  margin-bottom: 4px;
-}
-
-.table-cell .delete {
-  background-color: red; 
-}
-
+/* Pagination Styles */
 .pagination {
   margin-top: 15px;
   display: flex;
@@ -104,24 +103,25 @@
 }
 
 .pagination button {
-  margin: 0 5px; 
-  padding: 5px 10px; 
-  background-color: #f0f0f0; 
+  margin: 0 5px;
+  padding: 5px 10px;
+  background-color: #f0f0f0;
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .pagination button.active {
-  background-color: #007bff; 
-  color: #fff; 
+  background-color: #007bff;
+  color: #fff;
 }
 
 .pagination button:disabled {
-  opacity: 0.6; 
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
+/* Menu Toggle */
 .menu-toggle {
   position: relative;
   display: inline-block;
@@ -159,18 +159,19 @@
   transform: translateY(8px);
 }
 
-#toggle:checked+.button .icon {
+#toggle:checked + .button .icon {
   background-color: transparent;
 }
 
-#toggle:checked+.button .icon:before {
+#toggle:checked + .button .icon:before {
   transform: rotate(45deg) translateY(0);
 }
 
-#toggle:checked+.button .icon:after {
+#toggle:checked + .button .icon:after {
   transform: rotate(-45deg) translateY(0);
 }
 
+/* Menu Styles */
 .menu {
   position: absolute;
   top: 100%;
@@ -187,13 +188,14 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-#toggle:checked+.button~.menu {
+#toggle:checked + .button ~ .menu {
   display: block;
 }
 
 .menu li {
   padding: 10px;
 }
+
 .menu ul {
   list-style: none;
 }
@@ -203,9 +205,10 @@
   color: #333;
 }
 
+/* Responsive Styles */
 @media (max-width: 600px) {
   .table-cell {
-    flex: none; /* Disable flex-grow and flex-shrink */
-    width: 100%; /* Set a fixed width for smaller devices */
+    flex: none;
+    width: 50%;
   }
 }
