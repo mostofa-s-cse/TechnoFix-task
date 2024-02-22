@@ -16,6 +16,22 @@
   justify-content: space-between;
   align-items: center;
 }
+
+#itemsPerPage {
+  padding: 4px; 
+  font-size: 16px; 
+  border: 1px solid #ccc; 
+  border-radius: 5px;
+  margin-bottom: 10px; 
+}
+
+/* CSS for the label */
+.container label {
+  margin-right: 10px; 
+  font-size: 16px; 
+}
+
+
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -34,6 +50,48 @@
 .table-cell {
   flex: 1;
   padding: 8px;
+}
+
+.table-cell button {
+  margin-right: 5px; 
+  padding: 5px 10px; 
+  color: #fff; 
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.table-cell .edit {
+  background-color: #007bff; 
+}
+
+.table-cell .delete {
+  background-color: red; 
+}
+
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pagination button {
+  margin: 0 5px; /* Adjust margin as needed */
+  padding: 5px 10px; /* Adjust padding as needed */
+  background-color: #f0f0f0; /* Background color */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.pagination button.active {
+  background-color: #007bff; /* Active page button background color */
+  color: #fff; /* Active page button text color */
+}
+
+.pagination button:disabled {
+  opacity: 0.6; /* Adjust opacity for disabled buttons */
+  cursor: not-allowed;
 }
 
 .menu-toggle {

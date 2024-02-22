@@ -54,7 +54,7 @@ const TableWithMenu = ({ columns }) => {
             <div>
               <h2>Table</h2>
               <div>
-                <label htmlFor="itemsPerPage">Items Per Page:</label>
+                <label htmlFor="itemsPerPage">Entries per page:</label>
                 <select
                   id="itemsPerPage"
                   value={itemsPerPage}
@@ -124,6 +124,20 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
     setCurrentPage(page);
   };
 
+  // Function to handle previous page
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // Function to handle next page
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
   return (
     <div className="table">
       <div className="table-row table-header">
@@ -147,8 +161,8 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
             >
               {column.key === 'action' ? (
                 <>
-                  <button onClick={() => handleEdit(row.id)}>Edit</button>
-                  <button onClick={() => handleDelete(row.id)}>Delete</button>
+                  <button className='edit' onClick={() => handleEdit(row.id)}>Edit</button>
+                  <button className='delete' onClick={() => handleDelete(row.id)}>Delete</button>
                 </>
               ) : (
                 row[column.key]
@@ -159,16 +173,19 @@ const CustomTable = ({ columns, data, itemsPerPage }) => {
       ))}
       {/* Pagination controls */}
       <div className="pagination">
-        <span className="page-number">Page {currentPage} of {totalPages}</span>
+      <span className="page-number">Page {currentPage} of {totalPages}</span>
+        <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
         {Array.from({ length: totalPages }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => handlePageChange(index + 1)}
-            className={currentPage === index + 1 ? 'active' : ''}
-          >
-            {index + 1}
-          </button>
-        ))}
+            <button
+              key={index}
+              onClick={() => handlePageChange(index + 1)}
+              className={currentPage === index + 1 ? 'active' : ''}
+              disabled={currentPage === index + 1}
+            >
+              {index + 1}
+            </button>
+          ))}
+        <button onClick={handleNextPage} disabled={currentPage === totalPages}>Next</button>
       </div>
     </div>
   );
